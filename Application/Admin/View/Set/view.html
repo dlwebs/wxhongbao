@@ -1,0 +1,64 @@
+<link href="/css/jquery.datetimepicker.css" rel="stylesheet">
+<script src="/js/jquery.datetimepicker.js"></script>
+<h2 class="sub-header">设置</h2>
+<div class="row placeholders">
+    <div class="col-md-7">
+        <form id="addform" class="form-horizontal" role="form" method="post" action="__MODULE__/Set/save" enctype="multipart/form-data">
+        <input type="hidden" name="set_id" value="{$setinfo.set_id|default=1}">
+            <div class="form-group">
+              <label for="userid" class="col-sm-2 control-label">初始资金</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="set_beginmoney" name="set_beginmoney" value="{$setinfo.set_beginmoney|default=10}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-2 control-label">提现资金</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="set_getmoney" name="set_getmoney" value="{$setinfo.set_getmoney|default=1000}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-2 control-label">分享得到资金</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="set_sharemoney" name="set_sharemoney" value="{$setinfo.set_sharemoney|default=1}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-2 control-label">活动截止日</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="set_untildate" name="set_untildate" value="{$setinfo.set_untildate}">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" id="addbtn">保存</button>
+              </div>
+            </div>
+          </form>
+  </div>
+</div>
+<script type="text/javascript">
+$(function () {
+    $("#addbtn").click(function () {
+        var set_beginmoney = $("#set_beginmoney").val();
+        if (!set_beginmoney) {
+            alert("初始资金");
+            return false;
+        }
+        var set_getmoney = $("#set_getmoney").val();
+        if (!set_getmoney) {
+            alert("提现资金");
+            return false;
+        }
+        var set_sharemoney = $("#set_sharemoney").val();
+        if (!set_sharemoney) {
+            alert("分享得到资金");
+            return false;
+        }
+        $("#addform").submit();
+    });
+    $('#set_untildate').datetimepicker({
+        lang:'ch', timepicker:false, format:'Y-m-d', formatDate:'Y-m-d', allowBlank:true, scrollInput:false
+    });
+});
+</script>

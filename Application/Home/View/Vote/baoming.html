@@ -1,0 +1,101 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<title>填写参赛信息</title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=get-target-densitydpi,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width, user-scalable=no" />
+<meta name="apple-touch-fullscreen" content="no" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+<link rel="stylesheet" type="text/css" href="/images/index.css">
+ 
+<script type="text/javascript" language="javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/touchslider.dev.js"></script>
+<script type="text/javascript" src="/js/touchScroll.js"></script>
+<script type="text/javascript" src="/js/awap.js?v=1"></script>
+<script type="text/javascript" language="javascript" src="/js/topHeight.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
+
+
+<style>
+
+body{margin:0 auto;max-width:500px;}
+.bgHeight{ }
+</style>
+<script type="text/javascript" src="/js/pcasunzip2.js"></script>
+</head>
+
+<body>
+
+<header class="top box_shadow_1 clearfix">
+	<div class="top_btnL fl"><a href="javascript:void(0);" onClick="history.go(-1);">返回</a></div>
+    <div class="top_btnR2 fr"></div>
+    <p class="top_title">填写参赛信息</p>
+</header>
+<div class="height45"></div>
+
+<form action="__MODULE__/Vote/savebm" id="baomingform" method="post" enctype="multipart/form-data">
+<input type="hidden" name="vote_id" value="{$voteid}">
+<div class="warp apply_warp">
+	<p class="explain">发布违法、反动内容或冒用他人、组织名义发布，将依据记录提交公安机关处理，请不要涉及敏感政治话题</p>
+    
+    <div class="apply_add2"><input class="txt1" id="username" name="username" type="text" maxlength="10" required placeholder="真实姓名（必填）" value=""></div>
+    <div class="apply_add2"><input class="txt1 " id="phone" name="phone" type="text" maxlength="11" required placeholder="手机，非常重要，唯一身份析别（必填）" value=""></div>
+    <div class="apply_add2"><input class="txt1" id="weixin" name="weixin" type="text" maxlength="30" required placeholder="微信，唯一互联网联系方式（必填）" value=""></div>
+    <div class="apply_add2 apply_add4 apply_add4_1" style="display:block;"><select id="province" name="province" onfocus="selFontColor()"></select></div>
+    <div class="apply_add2 apply_add4 apply_add4_1" style="display:block;"><select id="city" name="city"></select></div>
+    <div class="apply_add2 apply_add4 apply_add4_1"><select id="area" name="area"></select></div>
+    
+    
+         <div class="apply_add2"><input type="file" name="weibo_send1" class="fpicUp_k" id="fpicUp_k1"></div>
+         <div class="apply_add2"><input type="file" name="weibo_send2" class="fpicUp_k" id="fpicUp_k2"></div>
+         <div class="apply_add2"><input type="file" name="weibo_send3" class="fpicUp_k" id="fpicUp_k3"></div>
+    
+    <div class="apply_add2"><input class="txt1" id="matmv" name="matmv" type="text" maxlength="200" required placeholder="美拍、优酷视频，可粘贴视频网址（可不填）" value=""></div>
+    
+    <div class="apply_add2"><input class="txt1" id="kouhao" name="kouhao" type="text" maxlength="30" required placeholder="参赛口号（可不填）"></div>
+    
+    <div class="apply_add2"><input class="txt1" id="beizhu" name="beizhu" type="text" maxlength="20" required placeholder="备注，附加说明（可不填）"></div>
+    
+    <a class="btn_mobile1 apply_sub" id="apply_add_on1" href="javascript:void(0); " onClick="match_Join_save();">提 交</a>
+    <a class="btn_mobile2 apply_sub" id="apply_add_on2" href="javascript:void(0); ">提 交</a>
+</div>
+</form>
+<script language="javascript" defer>
+     new PCAS("province","city","area","","","")
+</script>
+
+
+
+<div class="net_re" id="net_re"></div>
+<div class="ex_copy"><a href="javascript:void(0);" onClick="location.href=' '">&copy;微谷云
+
+</div>
+<div id="foot">
+
+<div class="height45"></div>
+
+<div class="footer2 gradient_7 box_shadow_1">
+	    <a href="javascript:void(0);" onClick="history.go(-1);"><div class="footer2_left fl">返回</div></a>
+     <div class="fr">
+        <a href="javascript:void(0);" onClick="location.href='apply-create.html';"><div class="footer2_right fl"><div class="footer2_right_2">发起</div></div></a><a href="javascript:void(0);" onClick="window.location.reload();"><div class="footer2_right fl"><div class="footer2_right_2">刷新</div></div></a>
+     </div>
+</div>
+
+</div>
+
+
+<script type="text/javascript" src="/js/WeiXinOptionMenu.js"></script>
+
+
+   <script>qcodeSite('match_join')</script>
+<div class="none">
+</div><div class="WeiXinShareShow" onclick="shareWebClose()"></div>
+<div class="WeiXinShareShow2" onclick="shareWebClose()"></div>
+
+
+</body>
+</html>
+

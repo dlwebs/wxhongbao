@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="no-js"> <!--<![endif]-->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>哈蓝送红包，还不快来领！</title>
+
+    <meta name="description" content="   哈蓝送你100元 ">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <link rel="stylesheet" href="/style/breakEgg.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+
+
+</head>
+<body>
+<img style="width: 0px; position: absolute" src="/img/force.png"/>
+
+<div class="chui" id="chui" style="display: none">
+    <img src="/img/chui1.png" width="80"/>
+</div>
+<section class="stage">
+    <img class="bg" src="/img/bj.jpg">
+    <img class="yc" src="/img/YC.png"/>
+
+    <div class="" style="z-index:99;position: absolute;left: 47%;top: 26%"><a href="#"
+                                                                              style="color:black;font-size:0.8rem;" onclick=" $('#mcover2').show();">规则</a>
+    </div>
+    <div class="guize">
+        <!--<a href="#">活动规则</a> -->
+        <ul style="padding-left: 0">
+            <foreach name="my_money_list" item="mymoney">
+                <li>
+                    <img width="40px" style="border-radius: 50px" src="{$mymoney.user_image}">
+
+                    <div class="qian">{$mymoney.user_money}元</div>
+                    <div style="color: #ffffff">{$mymoney.user_name}成功与你合体一次！</div>
+                    <br>
+
+                    <div style="color: #d58512;" > {$mymoney.money_time}</div>
+                    <div style="color: #ffffff">小手一抖 红包到手！</div>
+                </li>
+            </foreach>
+        </ul>
+        <div style="text-align: center" >技术支持：<a href="tel:133624480755">诸葛王坚</a> </div>
+    </div>
+    <div class="info">
+        <img src="/img/force.png" class="infopic">
+
+        <div class="qianshu">￥{$totel_money}</div>
+        <div style="color: #fff; font-family: 微软雅黑">转发链接邀请好友参与，红包立即合体变大！</div>
+        <div style="color: #fff; font-family: 微软雅黑">当红包达到100元时，可直接提现！</div>
+        <div style="clear: both;height: 38px;margin-top: 10px">
+            <a class="guanzhu twocol" onclick="$('.zhongjiangtip').hide();$('#mcover').show();$('#mcover img').show()">邀请好友</a>
+
+            <p class="guanzhu twocol white"><a style="color:red;vertical-align:middle"
+                                               href="__MODULE__/index/tixian?openid={$userinfo.openid}">申请提现</a></p>
+        </div>
+        <!-- <div style="color: #ffffff;font-size: .8rem;font-family: 微软雅黑;">期待好友合体，马上变大红包！<a href="#" style=";z-index:9999;display:inline-block;color:#fff">刷新进度</a> </div>-->
+    </div>
+    <div class="main-box">
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+</section>
+
+<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display: block;">
+    <img src="/img/share.png" style="display: none">
+
+    <div class="zhongjiangtip">
+        <if condition="$is_get_money eq 0">
+            <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">恭喜{$userinfo.nickname}您获得<span class="yellow num3">{$setinfo.set_beginmoney}</span>元红包
+            </p>
+        </if>
+        <if condition="$is_get_money eq 1">
+            <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">恭喜{$userinfo.nickname}您目前共获得了<span class="yellow num3">{$totel_money}</span>元红包
+            </p>
+        </if>
+        <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">关注微信可申请提现</p>
+
+        <p class="guanzhu"><a style="color:#fff;z-index:9999;display:inline-block"
+                              href="http://mp.weixin.qq.com/s?__biz=MjM5NTY4NTk5NQ==&mid=202275178&idx=1&sn=e92e80502399f368df1a48f1848cb59e#rd">点此关注公众账户</a>
+        </p>
+    </div>
+
+</div>
+<div id="mcover2" onclick="document.getElementById('mcover2').style.display='';" style="display: none;">
+    <div class="zhongjiangtip" style="padding-right: 10px;width: 80%">
+    <p>
+        活动时间：
+    </p>
+
+    <p>
+        第一波:2015.1.10~2015.1.17
+    </p>
+
+    <p>
+        活动规则：
+    </p>
+
+    <p>
+        1.参与本次红包活动请使用微信客户端参与
+    </p>
+
+    <p>
+        2.领取红包后分享给好友合体，可让自己红包随机增大
+    </p>
+
+    <p>
+        3.奖励领取：点击 “哈蓝肌肤营养面膜“关注后即可按红包金额申请提现
+    </p>
+
+    <p>
+        4.红包金额有限，领完即止
+    </p>
+
+    <p>
+        5.兑换时间：活动介绍后5个工作日内发放完毕
+    </p>
+
+    <p>
+        6.合体红包满100即可直接提取现金！（每次最多只可提现100元）
+    </p>
+
+    <p>
+        7.红包不可累积到下次活动
+    </p>
+
+    <p>
+        8.在获取和使用过程中，如果出现违规行为，（如作弊，刷信誉等）本平台将更具自身合理判断取消用户获奖资格
+    </p>
+
+    <p>
+        9.本活动最终解释权归：广州市哈蓝生物科技有限公司 所有
+    </p>
+
+    <p>
+        <br/>
+    </p>
+</div>
+</div>
+<script src="/js/vendor/jquery-1.10.2.min.js"></script>
+<script src="/js/hammer.min.js"></script>
+<script src="/js/plugins.js"></script>
+
+<script src="/js/main.js"></script>
+<script src="/js/weixin.js"></script>
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+
+    $(function () {
+
+        WeixinApi.ready(function (Api) {
+
+            // 微信分享的数据
+            var wxData = {
+                "appId": "wxc43356a7940e32d", // 服务号可以填写appId
+                "imgUrl": 'http://hongbao.webs.dlwebs.com/img/force.png',
+                "link": 'http://hongbao.webs.dlwebs.com/index.php/index/index?parentid={$userinfo.openid}',
+                "desc": 'hi，我是哈蓝女神护花大使{$userinfo.nickname}，送你哈蓝面膜百元红包大礼！',
+                "title": "任性~钱多•速来，{$userinfo.nickname}让你华丽转身变土豪"
+            };
+
+            // 分享的回调
+            var wxCallbacks = {
+                // 收藏操作不执行回调，默认是开启(true)的
+                favorite: false,
+
+                // 分享操作开始之前
+                ready: function () {
+                    // 你可以在这里对分享的数据进行重组
+//            alert("准备分享");
+                },
+                // 分享被用户自动取消
+                cancel: function (resp) {
+                    // 你可以在你的页面上给用户一个小Tip，为什么要取消呢？
+//            alert("分享被取消，msg=" + resp.err_msg);
+                },
+                // 分享失败了
+                fail: function (resp) {
+                    // 分享失败了，是不是可以告诉用户：不要紧，可能是网络问题，一会儿再试试？
+//            alert("分享失败，msg=" + resp.err_msg);
+                },
+                // 分享成功
+                confirm: function (resp) {
+                    // 分享成功了，我们是不是可以做一些分享统计呢？
+//            alert("分享成功，msg=" + resp.err_msg);
+                },
+                // 整个分享过程结束
+                all: function (resp, shareTo) {
+                    // 如果你做的是一个鼓励用户进行分享的产品，在这里是不是可以给用户一些反馈了？
+//            alert("分享" + (shareTo ? "到" + shareTo : "") + "结束，msg=" + resp.err_msg);
+                }
+            };
+
+            // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
+            Api.shareToFriend(wxData, wxCallbacks);
+
+            // 点击分享到朋友圈，会执行下面这个代码
+            Api.shareToTimeline(wxData, wxCallbacks);
+
+            // 点击分享到腾讯微博，会执行下面这个代码
+            Api.shareToWeibo(wxData, wxCallbacks);
+
+            // iOS上，可以直接调用这个API进行分享，一句话搞定
+            Api.generalShare(wxData, wxCallbacks);
+
+            // 激活WeixinApi的hook功能
+            Api.hook.enable(wxData, wxCallbacks);
+
+            // iOS简单处理一下
+            Api.hook.forIOS(wxData);
+        });
+
+    })
+
+
+</script>
+
+</body>
+</html>

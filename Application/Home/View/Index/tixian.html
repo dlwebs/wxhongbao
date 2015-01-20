@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="/style/breakEgg.css">
+<link rel="stylesheet" href="/css/normalize.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/tixian.css">
+<script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+<form name="tixianform" id="tixianform" method="post" action="__MODULE__/Index/savetx">
+<input type="hidden" name="totel_money" id="totel_money" value="{$totel_money}">
+<input type="hidden" name="tx_userid" id="tx_userid" value="{$openid}">
+<div>
+<div class="head">
+<span class="left">红包有效期</span>
+<span class="right">{$setinfo.set_untildate}</span>
+</div>
+<div class="tixian-content">
+<h2 class="titie">新年红包</h2>
+<hr>
+<div class="field">
+<div class="left">红包总额</div>
+<div class="right">{$totel_money}</div>
+</div>
+<hr>
+<div class="field">
+<div class="left">收款姓名</div>
+<div class="right"><input type="text" name="tx_name" id="tx_name" placeholder="收款人姓名"></div>
+</div>
+<hr>
+<div class="field">
+<div class="left">手机号码</div>
+<div class="right"><input type="text" name="tx_phone" id="tx_phone" placeholder="收款人手机号码"></div>
+</div>
+<hr>
+<div class="field">
+<div class="left">提现方式</div>
+<div class="right">
+<select name="tx_type">
+<option value="1">支付宝</option>
+<option value="2">银行卡</option>
+</select>
+</div>
+</div>
+<hr>
+<div class="field">
+<div class="left">帐号或卡号</div>
+<div class="right"><input type="text" name="tx_card" id="tx_card" placeholder="帐号或卡号"></div>
+</div>
+<hr>
+<div class="field">
+<div class="left">确认帐号或卡号</div>
+<div class="right"><input type="text" name="tx_card2" id="tx_card2" placeholder="确认帐号或卡号"></div>
+</div>
+<hr>
+<div class="field">
+    <div class="left"><input type="text" name="tx_number" id="tx_number" placeholder="" value="{$setinfo.set_getmoney}" readonly>元</div>
+<div class="right"><input class="tixian-btn" type="button" value="提现" id="tixianbtn"></div>
+</div>
+<hr>
+</div>
+</div>
+<div class="return"><a href="__MODULE__/index/index">返回红包列表</a></div>
+</form>
+<script src="/js/vendor/jquery-1.10.2.min.js"></script>
+<script src="/js/hammer.min.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/WeixinApi.js"></script>
+<!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script type="text/javascript">
+$(function () {
+    $("#tixianbtn").click(function () {
+        var tx_name = $("#tx_name").val();
+        if (!tx_name) {
+            alert("请填写收款人姓名");
+            return false;
+        }
+        var tx_phone = $("#tx_phone").val();
+        if (!tx_phone) {
+            alert("请填写收款人手机号码");
+            return false;
+        }
+        var tx_card = $("#tx_card").val();
+        if (!tx_card) {
+            alert("请填写帐号或卡号");
+            return false;
+        }
+        var tx_card2 = $("#tx_card2").val();
+        if (tx_card != tx_card2) {
+            alert("两次输入的卡号或帐号不一致");
+            return false;
+        }
+        var tx_number = parseFloat($("#tx_number").val());
+        if (!tx_number) {
+            alert("请填写想要提现的金额");
+            return false;
+        }
+        var totel_money = parseFloat($("#totel_money").val());
+        if (totel_money < tx_number) {
+            alert("最多只能提现"+totel_money+"元");
+            return false;
+        }
+        $("#tixianform").submit();
+    });
+
+    WeixinApi.ready(function (Api) {
+        Api.hideOptionMenu();
+    });
+});
+</script>
+</body>
+</html>

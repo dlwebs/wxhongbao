@@ -1,0 +1,39 @@
+<h2 class="sub-header">提现列表</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>收款人姓名</th>
+            <th>收款人手机号</th>
+            <th>提现金额</th>
+            <th>提现状态</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <foreach name="txlist" item="tixian">
+          <tr>
+            <td class="col-sm-2">{$tixian.tx_name}</td>
+            <td class="col-sm-2">{$tixian.tx_phone}</td>
+            <td class="col-sm-2">{$tixian.tx_number}</td>
+            <td class="col-sm-2"><if condition="$tixian['tx_status'] eq '0'">未转账</if><if condition="$tixian['tx_status'] eq '1'">已转账</if></td>
+            <td class="col-sm-2">
+                <a href="__MODULE__/viewtx/{$tixian.tx_id}">详情</a> 
+                <if condition="$tixian['tx_status'] eq '0'"><a href="javascript:;" id="modtx_{$tixian.tx_id}">修改状态</a></if>
+            </td>
+          </tr>
+        </foreach>
+        </tbody>
+      </table>
+      {$page}
+    </div>
+<script type="text/javascript">
+$(function () {
+    $("a[id^='modtx_']").click(function () {
+        if (confirm("您确认要将此提现申请的状态修改成已转账？")) {
+            var id = this.id.split("_");
+            location.href = "__MODULE__/modtx/"+id[1];
+        }
+    });
+});
+</script>

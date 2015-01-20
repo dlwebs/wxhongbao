@@ -1,0 +1,321 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<title>{$voteinfo.title}</title>
+<meta name="keywords" content="{$voteinfo.title}">
+<meta name="description" content="“{$voteinfo.title}">
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=get-target-densitydpi,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width, user-scalable=no" />
+<meta name="apple-touch-fullscreen" content="no" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+<link rel="stylesheet" type="text/css" href="/images/index.css">
+ 
+<script type="text/javascript" language="javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/touchslider.dev.js"></script>
+<script type="text/javascript" src="/js/touchScroll.js"></script>
+<script type="text/javascript" src="/js/awap.js"></script>
+<script type="text/javascript" language="javascript" src="/js/topHeight.js"></script>
+<script type="text/javascript" src="/js/weixin.js"></script>
+    <script src="/js/weixin.js"></script>
+    <script>
+
+        $(function () {
+
+            WeixinApi.ready(function (Api) {
+
+                // 微信分享的数据
+                var wxData = {
+                    "appId": "{$signPackage.appId}", // 服务号可以填写appId
+                    "imgUrl": 'http://hongbao.webs.dlwebs.com/upload/{$voteinfo.weibo_send}',
+                    "link": 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc43356a7940e32d4&redirect_uri=http%3A%2F%2Fhongbao.webs.dlwebs.com%2Findex.php%2Fshowvote%2F1%2Fpiao&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect',
+                    "desc": '{$voteinfo.title}',
+                    "title": "{$voteinfo.title}"
+                };
+
+                // 分享的回调
+                var wxCallbacks = {
+                    // 收藏操作不执行回调，默认是开启(true)的
+                    favorite: false,
+
+                    // 分享操作开始之前
+                    ready: function () {
+                        // 你可以在这里对分享的数据进行重组
+//            alert("准备分享");
+                    },
+                    // 分享被用户自动取消
+                    cancel: function (resp) {
+                        // 你可以在你的页面上给用户一个小Tip，为什么要取消呢？
+//            alert("分享被取消，msg=" + resp.err_msg);
+                    },
+                    // 分享失败了
+                    fail: function (resp) {
+                        // 分享失败了，是不是可以告诉用户：不要紧，可能是网络问题，一会儿再试试？
+//            alert("分享失败，msg=" + resp.err_msg);
+                    },
+                    // 分享成功
+                    confirm: function (resp) {
+                        // 分享成功了，我们是不是可以做一些分享统计呢？
+//            alert("分享成功，msg=" + resp.err_msg);
+                    },
+                    // 整个分享过程结束
+                    all: function (resp, shareTo) {
+                        // 如果你做的是一个鼓励用户进行分享的产品，在这里是不是可以给用户一些反馈了？
+//            alert("分享" + (shareTo ? "到" + shareTo : "") + "结束，msg=" + resp.err_msg);
+                    }
+                };
+
+                // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
+                Api.shareToFriend(wxData, wxCallbacks);
+
+                // 点击分享到朋友圈，会执行下面这个代码
+                Api.shareToTimeline(wxData, wxCallbacks);
+
+                // 点击分享到腾讯微博，会执行下面这个代码
+                Api.shareToWeibo(wxData, wxCallbacks);
+
+                // iOS上，可以直接调用这个API进行分享，一句话搞定
+                Api.generalShare(wxData, wxCallbacks);
+
+                // 激活WeixinApi的hook功能
+                Api.hook.enable(wxData, wxCallbacks);
+
+                // iOS简单处理一下
+                Api.hook.forIOS(wxData);
+            });
+
+        })
+
+
+    </script>
+
+   <!-- <script >
+        wx.config({
+
+            appId: '{$signPackage.appId}', // 必填，公众号的唯一标识
+            timestamp: {$signPackage.timestamp}, // 必填，生成签名的时间戳
+            nonceStr:  '{$signPackage.nonceStr}', // 必填，生成签名的随机串
+            signature:  '{$signPackage.signature}',// 必填，签名，见附录1
+            jsApiList: [
+            "onMenuShareTimeline",
+           "onMenuShareAppMessage",
+            "onMenuShareQQ",
+            "onMenuShareWeibo"
+        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(function(){
+            var opt={
+                title: '{$voteinfo.title}', // 分享标题
+                desc: '{$voteinfo.title}', // 分享描述
+                link: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc43356a7940e32d4&redirect_uri=http%3A%2F%2Fhongbao.webs.dlwebs.com%2Findex.php%2Fshowvote%2F1%2Fpiao&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect', // 分享链接
+
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            }
+            wx.onMenuShareTimeline(opt);
+            wx.onMenuShareAppMessage(opt);
+            wx.onMenuShareQQ(opt);
+            wx.onMenuShareWeibo(opt);
+        });
+
+    </script>
+-->
+<style>
+
+body{margin:0 auto;max-width:500px;}
+.bgHeight{ }
+</style>
+<script src="/js/jquery.masonry.js"></script>
+</head>
+
+<body>
+
+<img style="width: 0px; position: absolute" src="/upload/{$voteinfo.weibo_send}"/>
+<header class="top box_shadow_1 clearfix">
+	<div class="top_btnL fl"><a href="javascript:void(0);" onClick="history.go(-1);">返回</a></div>
+    <div class="top_btnR2 fr"><a href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'">参赛</a></div>
+    <p class="top_title">比赛投票</p>
+</header>
+<div class="height45"></div>
+
+
+<article class="explain_match">
+
+  <div class="div_match">
+
+     <div class="bgHeight"></div>
+	 
+     
+       <h3 class="ex_title">{$voteinfo.title}</h3>
+       <div class="ex_suji clearfix"><ul><!--<li>访问数217986</li>--><li>分享6105+</li><li>投票{$total_piao}</li></ul></div>
+	 
+          <div class="ex_banner ex_txt4"><img src="/upload/{$voteinfo.weibo_send}" /></div>
+     
+     <ul class="ex_list">
+     	<li class="apli1"><a href="javascript:void(0);">比赛时间：{$voteinfo.timeTxt}</a></li>
+                  <li class="apli5"><a href="http://mp.weixin.qq.com/s?__biz=MjM5NTY4NTk5NQ==&mid=202275178&idx=1&sn=e92e80502399f368df1a48f1848cb59e#rd">比赛主办：{$voteinfo.host} >></a></li>
+             
+     </ul>
+     
+     
+     <div class="ex_txt ex2_txt" id="info">{$voteinfo.info|nl2br}</div>
+
+     <a class="ex_btn" href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'">我要参赛（已有{$total_baoming}人参赛）</a>
+     
+<!--     <div class="search search3">
+         <form action="__MODULE__/vote/search" method="post" name="form" id="searchform">
+             <input type="hidden" name="vote_id" value="{$voteinfo.vote_id}">
+     	    <input class="search_text" id="search_text" name="search_text" type="text" placeholder="请输入“参赛者姓名”搜索" maxlength="15" value="">
+            <input class="search_btn" type="submit" value="" onClick="match_user_search()">
+         </form>
+     </div>-->
+     
+     <div class="match_search_con" id="match_search_con"></div>
+   
+     
+     <div class="match_page clearfix" id="phsite">
+          <ul>
+              <a href="javascript:void(0)" onClick="location.href='__MODULE__/showvote/{$voteinfo.vote_id}/piao'"><if condition="$sortby eq 'piao'"><li class="phsite_on"><div class="match_page_on"><div class="match_page_on1"></div></div>票数最多</li><else /><li class="">票数最多</li></if></a>
+              <a href="javascript:void(0)" onClick="location.href='__MODULE__/showvote/{$voteinfo.vote_id}/new'"><if condition="($sortby eq '') or ($sortby eq 'new')"><li class="phsite_on"><div class="match_page_on"><div class="match_page_on1"></div></div>最新参赛</li><else /><li class="">最新参赛</li></if></a>
+          </ul>
+     </div>
+     
+     <div class="ex_txt ex2_txt none" style=" margin-top:15px;">公告：为了打造健康的投票环境，严禁恶意刷票行为，恶意刷票严重者将直接取消参赛格资。提示：请大家多使用分享功能，感谢你对本次活动的支持！</div>
+     
+  </div>  
+  
+  
+  <div class="photo2 clearfix" id="pageCon">
+       <foreach name="bmlist" item="baoming">
+          <div class="picCon fl">
+               <div class="picCon1"><a href="javascript:void(0)"><img src="/upload/{$baoming.weibo_send1}" width="226" height="300" /></a>
+<!--                    <div class="picCon3"><div class="picCon3_1" onClick="location.href='match-pic-40465-1-1-0-.html'">索要TA微信</div></div>-->
+               </div>
+               <div class="picCon2" id="div_tpsu_40465" onClick="add_piao({$baoming.bm_id});"><ul><li class="pli1"><span id="piaoshu{$baoming.bm_id}">{$baoming.total_piao}</span><span><img src="/images/sbg4.png" /></span></li><li class="pli2">{$baoming.username}<img src="/images/sbg3.png" /></li></ul></div>
+          </div>
+      </foreach>
+      
+      <script>
+	     PicListAutoWidth();PicAutoSet();var t=setInterval("PicAutoSet()",600); 
+             function add_piao(piao) {
+                     $.post('__MODULE__/addpiao/'+piao, function (data) {
+                         if (data == '投票成功') {
+                            var oldpiao = $('#piaoshu'+piao).html();
+                            var newpiao = parseInt(oldpiao) + 1;
+                            $('#piaoshu'+piao).html(newpiao);
+                         } else {
+                             alert(data);
+                         }
+                     });
+                 }
+      </script>
+      
+  </div>
+  
+  
+      
+  <div class="div_match">
+  
+     
+     <div class="match_page clearfix box_shadow_2">
+          <ul>
+             
+			     <li class="pli3">上一页</li>
+			 
+                 <a href="javascript:void(0)" onClick="location.href='match-2851--1-2.html#phsite'"><li>下一页</li></a>
+			 
+          </ul>
+     </div>
+     
+     
+     <div class="btn_list">
+        <a class="btn_mobile1 apply" href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'">我要参赛（已有{$total_baoming}人参赛）</a>
+     </div>
+
+  </div>    
+     
+</article>
+
+<div class="J_Shade"></div>
+
+
+<div class="apply_box apply_box1">
+	<p>输入报名信息</p>
+    <form action="javascript:void(0)" method="post">
+    <input type="text" id="username" name="username" placeholder="真实姓名（必填）" maxlength="4" value="">
+    <input type="text" id="phone" name="phone" placeholder="手机，非常重要，唯一身份析别（必填）" maxlength="11" value="">
+    <input type="text" id="weixin" name="weixin" placeholder="微信，唯一互联网联系方式（必填）" maxlength="30" value="">
+    <input type="text" id="beizhu" name="beizhu" placeholder="备注，附加说明" maxlength="25">
+    <div class="apply_boxBtn clearfix">
+        <ul>
+           <li class="sub" id="BtnOn1"><input id="aid" name="aid" type="hidden" value="2851"/><input class="BtnOn1" id="BtnOn1" type="submit" value="提交" onclick="apply_save();"></li>
+           <li class="sub2" id="BtnOn2">提交</li>
+           <li class="reset fr" id="BtnOn3">取消</li>
+        </ul>
+    </div>
+    </form>
+</div>
+ 
+
+<div class="apply_box apply_box2">
+	<p>请输入管理密码</p>
+    <input id="pwd" name="pwd" type="password" required placeholder="输入管理密码" maxlength="16">
+    <div class="apply_boxBtn clearfix">
+    	<ul>
+           <li class="sub" id="BtnOn4"><input class="BtnOn1" id="BtnOn1" type="submit" value="提交" onclick="apply_user_check();"></li>
+           <li class="sub2" id="BtnOn5">提交</li>
+           <li class="reset fr" id="BtnOn6">取消</li>
+        </ul>
+    </div>
+</div>
+
+<div class="net_re" id="net_re"></div>
+
+<div class="ex_copy"><a href="javascript:void(0);" onClick="location.href=' '">&copy;微谷云
+
+</div>
+<div id="foot">
+
+<div class="height45"></div>
+
+<div class="footer2 gradient_7 box_shadow_1">
+	    <a href="javascript:void(0);" onClick="history.go(-1);"><div class="footer2_left fl">返回</div></a>
+     <div class="fr">
+        <a href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'"><div class="footer2_right fl"><div class="footer2_right_2">参赛</div></div></a><a href="javascript:void(0);" onClick="window.location.reload();"><div class="footer2_right fl"><div class="footer2_right_2">刷新</div></div></a>
+     </div>
+</div>
+
+</div>
+
+
+<script type="text/javascript" src="/js/WeiXinOptionMenu.js"></script>
+
+
+   <script>qcodeSite('match')</script>
+<div class="none">
+<script src='http://w.cnzz.com/q_stat.php?id=1000517246&l=3' language='JavaScript'></script>
+</div><div class="WeiXinShareShow" onclick="shareWebClose()"></div>
+<div class="WeiXinShareShow2" onclick="shareWebClose()"></div>
+ 
+
+<div class="J_Shade"></div>
+<div class="J_Shade_tip">
+    <img class="J_Shade_tip_img" src="images/guide1.png" />
+    <div class="vote_tip_operate">
+        <div class="yl"><a href="javascript:void(0);">预览</a></div>
+        <div class="zf"><a href="javascript:void(0);" onClick="location.href='match-add.html';">再发一条</a></div>
+        <div class="fq"><a href="javascript:void(0);">放弃</a></div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
