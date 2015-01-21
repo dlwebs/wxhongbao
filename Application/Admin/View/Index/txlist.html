@@ -4,7 +4,8 @@
         <thead>
           <tr>
             <th>收款人姓名</th>
-            <th>收款人手机号</th>
+            <th>关注状态</th>
+            <th>关注日期</th>
             <th>提现金额</th>
             <th>提现状态</th>
             <th>Action</th>
@@ -14,7 +15,8 @@
         <foreach name="txlist" item="tixian">
           <tr>
             <td class="col-sm-2">{$tixian.tx_name}</td>
-            <td class="col-sm-2">{$tixian.tx_phone}</td>
+            <td class="col-sm-2">{$tixian.user_status}</td>
+            <td class="col-sm-2">{$tixian.user_regdate}</td>
             <td class="col-sm-2">{$tixian.tx_number}</td>
             <td class="col-sm-2"><if condition="$tixian['tx_status'] eq '0'">未转账</if><if condition="$tixian['tx_status'] eq '1'">已转账</if></td>
             <td class="col-sm-2">

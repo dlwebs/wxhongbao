@@ -16,12 +16,20 @@ class IndexController extends BaseController {
 
     public function txlistAction() {
         $tixian = M("hongbao_tixian");
+        $userobj = M("user");
         $count = $tixian->count();
         $page = new \Think\Page($count, 20);
         $txlist = $tixian->order('tx_date desc')->limit($page->firstRow.','.$page->listRows)->select();
+        $tixian_list = array();
+        foreach ($txlist as $value) {
+            $userinfo = $userobj->where('user_id = "'.$value['tx_userid'].'"')->find();
+            $value['user_status'] = ($userinfo['user_status'] == '1') ? '已关注' : '取消关注';
+            $value['user_regdate'] = $userinfo['user_regdate'];
+            $tixian_list[] = $value;
+        }
         $show = $page->show();
         $this->assign('page',$show);
-        $this->assign('txlist', $txlist);
+        $this->assign('txlist', $tixian_list);
         $this->display();
     }
 

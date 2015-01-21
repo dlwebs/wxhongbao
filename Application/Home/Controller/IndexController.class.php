@@ -98,7 +98,11 @@ class IndexController extends BaseController {
             $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['openid'].'"')->find();
             if (!$wxmoney) {
 //                $share_money = rand(1, $setinfo['set_sharemoney']);
-                $share_money = 0.1;
+                if ($totel_money < 50) {
+                    $share_money = $setinfo['set_sharemoney'];
+                } else {
+                    $share_money = rand(1, 3) / 10;
+                }
                 $data = array('money_owner'=>$parent, 'money_number'=>$share_money, 'money_from'=>$userinfo['openid'], 'money_time'=>date('Y-m-d H:i:s'));
                 $money_result = $money->add($data);
                 if ($money_result) {
