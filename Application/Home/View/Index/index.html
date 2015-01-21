@@ -162,11 +162,11 @@
 
             // 微信分享的数据
             var wxData = {
-                "appId": "wxc43356a7940e32d", // 服务号可以填写appId
-                "imgUrl": 'http://hongbao.webs.dlwebs.com/img/force.png',
-                "link": 'http://hongbao.webs.dlwebs.com/index.php/index/index?parentid={$userinfo.openid}',
-                "desc": 'hi，我是哈蓝女神护花大使{$userinfo.nickname}，送你哈蓝面膜百元红包大礼！',
-                "title": "任性~钱多•速来，{$userinfo.nickname}让你华丽转身变土豪"
+                "appId": "wx8d80c4101193fcdb", // 服务号可以填写appId
+                "imgUrl": 'http://wxhongbao.webs.dlwebs.com/img/force.png',
+                "link": 'http://wxhongbao.webs.dlwebs.com/index.php/index/index?parentid={$userinfo.openid}',
+                "desc": '{$setinfo.set_invite_msg}',
+                "title": "{$setinfo.set_share_msg}"
             };
 
             // 分享的回调

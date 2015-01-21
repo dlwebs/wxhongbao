@@ -2,7 +2,7 @@
 
 define("TOKEN", "hongbao");
 define("APPID", "wx8d80c4101193fcdb");
-define("APPSECRET", "a4e835f6b20748fba46a827017cc835a");
+define("APPSECRET", "57ff9e369cae45f7ec9ffe28c0b43e9f");
 $wxObj = new weixin();
 $wxObj->responseMsg();
 

@@ -3,9 +3,9 @@ namespace Home\Controller;
 
 class IndexController extends BaseController {
 
-    private $app_id = 'wxc43356a7940e32d4';
+    private $app_id = 'wx8d80c4101193fcdb';
 
-    private $app_secret = 'ec234926610a429dfaca36328af9b014';
+    private $app_secret = '57ff9e369cae45f7ec9ffe28c0b43e9f';
 
     public function sendAction() {
         $userID = I('get.uid');
