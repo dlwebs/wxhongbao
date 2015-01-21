@@ -58,8 +58,8 @@ class IndexController extends BaseController {
             $this->redirect('gotoOauth', array('parentid' => $parent));
         }
 
-        $money = M('money');
-        $setting = M("setting");
+        $money = M('hongbao_money');
+        $setting = M("hongbao_setting");
         $user = M('user');
         $setinfo = $setting->where('set_id = 1')->find();
         $my_money_list = array();
@@ -108,6 +108,9 @@ class IndexController extends BaseController {
         }
         $this->assign('my_money_list', $my_money_list);
         $this->assign('userinfo', $userinfo);
+        
+        $setinfo['set_weixin_msg'] = str_replace('##', $userinfo['nickname'], $setinfo['set_weixin_msg']);
+        $setinfo['set_share_msg'] = str_replace('##', $userinfo['nickname'], $setinfo['set_share_msg']);
         $this->assign('setinfo', $setinfo);
         $this->assign('totel_money', $totel_money);
         
@@ -139,17 +142,18 @@ class IndexController extends BaseController {
     
     public function tixianAction() {
         $openid = I('get.openid');
-        $setting = M("setting");
+        $setting = M("hongbao_setting");
         $setinfo = $setting->where('set_id = 1')->find();
         $untildate = strtotime($setinfo['set_untildate']);
         $now = time();
         if ($now > $untildate) {
-            $this->error('啊呀，你来迟了，哈蓝女神被人捋走了，一个不剩（不气馁，下期可累积继续）');
+            $this->error($setinfo['set_tixian_dateuntil']);
         }
         $user = M('user');
         $wxuser = $user->where('user_id = "'.$openid.'"')->find();
         if ($wxuser['user_money'] < $setinfo['set_getmoney']) {
-            $this->error($setinfo['set_getmoney']."都没有，还想泡哈蓝女神？快去赚吧！（第一波2015.1.12~1.19）");
+            $set_tixian_nomoney_msg = str_replace('##', $setinfo['set_getmoney'], $setinfo['set_tixian_nomoney']);
+            $this->error($set_tixian_nomoney_msg);
         }
         $this->assign('totel_money', $wxuser['user_money']);
         $this->assign('setinfo', $setinfo);
@@ -160,7 +164,7 @@ class IndexController extends BaseController {
     public function savetxAction() {
         $post = filterAllParam('post');
 
-        $setting = M("setting");
+        $setting = M("hongbao_setting");
         $setinfo = $setting->where('set_id = 1')->find();
         $user = M('user');
         $wxuser = $user->where('user_id = "'.$post['tx_userid'].'"')->find();
@@ -168,13 +172,14 @@ class IndexController extends BaseController {
             $this->error('未知用户');
         }
         if ($wxuser['user_money'] < $setinfo['set_getmoney']) {
-            $this->error("您账户金额小于可提现金额，账户金额大于".$setinfo['set_getmoney'].'时可提现');
+            $set_tixian_nomoney_msg = str_replace('##', $setinfo['set_getmoney'], $setinfo['set_tixian_nomoney']);
+            $this->error($set_tixian_nomoney_msg);
         }
         if ($post['tx_number'] > $wxuser['user_money']) {
             $this->error('您输入的金额大于你账户拥有的资金');
         }
 
-        $tixian = M("tixian");
+        $tixian = M("hongbao_tixian");
         unset($post['tx_card2']);
         unset($post['totel_money']);
         $post['tx_date'] = date('Y-m-d H:i:s');

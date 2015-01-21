@@ -4,14 +4,14 @@ namespace Admin\Controller;
 class SetController extends BaseController {
     
     public function viewAction() {
-        $setting = M("setting");
+        $setting = M("hongbao_setting");
         $setinfo = $setting->where('set_id = 1')->find();
         $this->assign('setinfo', $setinfo);
         $this->display();
     }
 
     public function saveAction(){
-        $setting = M("setting");
+        $setting = M("hongbao_setting");
         $post = filterAllParam('post');
         $setinfo = $setting->where('set_id = 1')->find();
         if ($setinfo) {

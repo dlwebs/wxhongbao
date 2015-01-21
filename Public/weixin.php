@@ -1,7 +1,7 @@
 <?php
 
-define("TOKEN", "weishi");
-define("APPID", "wx746191c3d2d0ebd7");
+define("TOKEN", "hongbao");
+define("APPID", "wx8d80c4101193fcdb");
 define("APPSECRET", "a4e835f6b20748fba46a827017cc835a");
 $wxObj = new weixin();
 $wxObj->responseMsg();
@@ -28,7 +28,7 @@ class weixin {
             $result = $this->receiveEvent($postObj);
             break;
             default:
-            $result = "unknown msg type: ".$RX_TYPE;
+            $this->valid();
             break;
             }
             echo $result;
@@ -88,7 +88,7 @@ class weixin {
             curl_setopt($ch, CURLOPT_HEADER, 0);
             $item_str = curl_exec($ch);
             curl_close($ch);
-            $item_str = sprintf($itemTpl, '欢迎关注伟诗味道', '欢迎大家来到伟诗的微信平台，我将在这里更好的和大家交流，为大家解决问题，希望我们成为好朋友，好哥们，伟诗和大家一起品味生活。', '', $_SERVER['SERVER_NAME'].'/index.php/weixin/'.$object->FromUserName.'/index');
+            $item_str = sprintf($itemTpl, '欢迎关注亿付·爱生活', '悦享潮流资讯，快乐最in生活。帮您更快了解绍兴地区商家的优惠信息！', '', $_SERVER['SERVER_NAME'].'/index.php/weixin/'.$object->FromUserName.'/index');
         }
         
         $xmlTpl = "<xml>

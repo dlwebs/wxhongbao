@@ -1,6 +1,6 @@
 
-DROP TABLE IF EXISTS `hongbao_user`;
-CREATE TABLE `hongbao_user` (
+DROP TABLE IF EXISTS `wxmodule_user`;
+CREATE TABLE `wxmodule_user` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` varchar(50) NOT NULL COMMENT '用户ID',
   `user_name` varchar(50) NOT NULL COMMENT '用户名',
@@ -9,14 +9,15 @@ CREATE TABLE `hongbao_user` (
   `user_image` varchar(500) NOT NULL COMMENT '用户头像',
   `user_status` enum('1','0') NOT NULL COMMENT '用户状态，1是启用，0是停用',
   `user_money` float(10,2) NOT NULL COMMENT '用户的金额',
+  `user_module` varchar(50) NOT NULL COMMENT '用户模块',
   PRIMARY KEY (`id`),
-  UNIQUE KEY user_id (user_id)
+  UNIQUE KEY user_module_id (user_id, user_module)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户表';
-INSERT INTO `hongbao_user` VALUES (1, 'admin', '管理员',  '21232f297a57a5a743894a0e4a801fc3', now(), '', '1', 0);
+INSERT INTO `wxmodule_user` VALUES (1, 'admin', '管理员',  '21232f297a57a5a743894a0e4a801fc3', now(), '', '1', 0, '');
 
 
-DROP TABLE IF EXISTS `hongbao_money`;
-CREATE TABLE `hongbao_money` (
+DROP TABLE IF EXISTS `wxmodule_hongbao_money`;
+CREATE TABLE `wxmodule_hongbao_money` (
   `money_id` int(11) NOT NULL auto_increment,
   `money_owner` varchar(50) NOT NULL,
   `money_number` float(8,2) NOT NULL default 0,
@@ -26,20 +27,26 @@ CREATE TABLE `hongbao_money` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='资金表';
 
 
-DROP TABLE IF EXISTS `hongbao_setting`;
-CREATE TABLE `hongbao_setting` (
+DROP TABLE IF EXISTS `wxmodule_hongbao_setting`;
+CREATE TABLE `wxmodule_hongbao_setting` (
   `set_id` int(11) NOT NULL auto_increment,
   `set_beginmoney` int(11) unsigned NOT NULL default 10 COMMENT '初始资金',
-  `set_getmoney` int(11) unsigned NOT NULL default 168 COMMENT '满足多少元可以体现',
-  `set_sharemoney` float(8,2) NOT NULL default 0.5 COMMENT '其它用户点击时我能分享到多少钱',
+  `set_getmoney` int(11) unsigned NOT NULL default 100 COMMENT '满足多少元可以体现',
+  `set_sharemoney` float(8,2) NOT NULL default 1 COMMENT '其它用户点击时我能分享到多少钱',
   `set_untildate` date NOT NULL  COMMENT '活动截止日期',
+  `set_weixin_msg` varchar(255) NOT NULL  COMMENT '微信显示',
+  `set_error_msg` varchar(255) NOT NULL  COMMENT '出错显示',
+  `set_share_msg` varchar(255) NOT NULL  COMMENT '微信分享显示',
+  `set_invite_msg` varchar(255) NOT NULL  COMMENT '邀请好友显示',
+  `set_tixian_nomoney` varchar(255) NOT NULL  COMMENT '未满提现金额时点击提取显示',
+  `set_tixian_dateuntil` varchar(255) NOT NULL  COMMENT '活动截止点击提取显示',
   PRIMARY KEY (`set_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='设置表';
-INSERT INTO `hongbao_setting` VALUES (1, 10, 200, 5, now());
+INSERT INTO `wxmodule_hongbao_setting` VALUES (1, 10, 100, 1, now(), '', '', '', '', '', '');
 
 
-DROP TABLE IF EXISTS `hongbao_tixian`;
-CREATE TABLE `hongbao_tixian` (
+DROP TABLE IF EXISTS `wxmodule_hongbao_tixian`;
+CREATE TABLE `wxmodule_hongbao_tixian` (
   `tx_id` int(11) NOT NULL auto_increment,
   `tx_userid` varchar(50) NOT NULL,
   `tx_name` varchar(50) NOT NULL  COMMENT '收款姓名',
@@ -54,8 +61,8 @@ CREATE TABLE `hongbao_tixian` (
 
 =================================================================================================
 
-DROP TABLE IF EXISTS `hongbao_vote`;
-CREATE TABLE `hongbao_vote` (
+DROP TABLE IF EXISTS `wxmodule_vote`;
+CREATE TABLE `wxmodule_vote` (
   `vote_id` int(11) NOT NULL auto_increment,
   `title` varchar(100) NOT NULL  COMMENT '比赛主题',
   `timeTxt` varchar(100) NOT NULL  COMMENT '比赛时间',
@@ -69,8 +76,8 @@ CREATE TABLE `hongbao_vote` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='投票表';
 
 
-DROP TABLE IF EXISTS `hongbao_baoming`;
-CREATE TABLE `hongbao_baoming` (
+DROP TABLE IF EXISTS `wxmodule_vote_baoming`;
+CREATE TABLE `wxmodule_vote_baoming` (
   `bm_id` int(11) NOT NULL auto_increment,
   `username` varchar(100) NOT NULL  COMMENT '真实姓名',
   `phone` varchar(100) NOT NULL  COMMENT '手机',
@@ -90,8 +97,8 @@ CREATE TABLE `hongbao_baoming` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='报名表';
 
 
-DROP TABLE IF EXISTS `hongbao_piao`;
-CREATE TABLE `hongbao_piao` (
+DROP TABLE IF EXISTS `wxmodule_vote_piao`;
+CREATE TABLE `wxmodule_vote_piao` (
   `piao_id` int(11) NOT NULL auto_increment,
   `bm_id` int(11) unsigned NOT NULL  COMMENT '被投票人id',
   `toupiao_user` varchar(100) NOT NULL  COMMENT '投票人',

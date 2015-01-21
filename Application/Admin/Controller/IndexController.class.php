@@ -15,7 +15,7 @@ class IndexController extends BaseController {
     }
 
     public function txlistAction() {
-        $tixian = M("tixian");
+        $tixian = M("hongbao_tixian");
         $count = $tixian->count();
         $page = new \Think\Page($count, 20);
         $txlist = $tixian->order('tx_date desc')->limit($page->firstRow.','.$page->listRows)->select();
@@ -27,7 +27,7 @@ class IndexController extends BaseController {
 
     public function txdetailAction() {
         $tx_id = I('get.id');
-        $tixian = M("tixian");
+        $tixian = M("hongbao_tixian");
         $txinfo = $tixian->where('tx_id = "'.$tx_id.'"')->find();
         if (!$txinfo) {
             $this->error("未知的提现申请");
@@ -38,7 +38,7 @@ class IndexController extends BaseController {
 
     public function modtxAction() {
         $tx_id = I('get.id');
-        $tixian = M("tixian");
+        $tixian = M("hongbao_tixian");
         $txinfo = $tixian->where('tx_id = "'.$tx_id.'"')->find();
         if (!$txinfo) {
             $this->error("未知的提现申请");

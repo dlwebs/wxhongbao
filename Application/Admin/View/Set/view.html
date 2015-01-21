@@ -6,27 +6,63 @@
         <form id="addform" class="form-horizontal" role="form" method="post" action="__MODULE__/Set/save" enctype="multipart/form-data">
         <input type="hidden" name="set_id" value="{$setinfo.set_id|default=1}">
             <div class="form-group">
-              <label for="userid" class="col-sm-2 control-label">初始资金</label>
-              <div class="col-sm-10">
+              <label for="userid" class="col-sm-4 control-label">初始资金</label>
+              <div class="col-sm-8">
                 <input type="text" class="form-control" id="set_beginmoney" name="set_beginmoney" value="{$setinfo.set_beginmoney|default=10}">
               </div>
             </div>
             <div class="form-group">
-              <label for="userid" class="col-sm-2 control-label">提现资金</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="set_getmoney" name="set_getmoney" value="{$setinfo.set_getmoney|default=1000}">
+              <label for="userid" class="col-sm-4 control-label">提现资金</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="set_getmoney" name="set_getmoney" value="{$setinfo.set_getmoney|default=100}">
               </div>
             </div>
             <div class="form-group">
-              <label for="userid" class="col-sm-2 control-label">分享得到资金</label>
-              <div class="col-sm-10">
+              <label for="userid" class="col-sm-4 control-label">分享得到资金</label>
+              <div class="col-sm-8">
                 <input type="text" class="form-control" id="set_sharemoney" name="set_sharemoney" value="{$setinfo.set_sharemoney|default=1}">
               </div>
             </div>
             <div class="form-group">
-              <label for="userid" class="col-sm-2 control-label">活动截止日</label>
-              <div class="col-sm-10">
+              <label for="userid" class="col-sm-4 control-label">活动截止日</label>
+              <div class="col-sm-8">
                   <input type="text" class="form-control" id="set_untildate" name="set_untildate" value="{$setinfo.set_untildate}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-4 control-label">微信显示消息</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="set_weixin_msg" name="set_weixin_msg" value="{$setinfo.set_weixin_msg}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-4 control-label">出错显示消息</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="set_error_msg" name="set_error_msg" value="{$setinfo.set_error_msg}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-4 control-label">微信分享显示消息</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="set_share_msg" name="set_share_msg" value="{$setinfo.set_share_msg}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-4 control-label">邀请好友显示消息</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="set_invite_msg" name="set_invite_msg" value="{$setinfo.set_invite_msg}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-4 control-label">未满提现金额时显示消息</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="set_tixian_nomoney" name="set_tixian_nomoney" value="{$setinfo.set_tixian_nomoney}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-4 control-label">活动截止显示消息</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="set_tixian_dateuntil" name="set_tixian_dateuntil" value="{$setinfo.set_tixian_dateuntil}">
               </div>
             </div>
             <div class="form-group">
@@ -53,6 +89,37 @@ $(function () {
         var set_sharemoney = $("#set_sharemoney").val();
         if (!set_sharemoney) {
             alert("分享得到资金");
+            return false;
+        }
+        
+        var set_weixin_msg = $("#set_weixin_msg").val();
+        if (!set_weixin_msg) {
+            alert("微信显示消息");
+            return false;
+        }
+        var set_error_msg = $("#set_error_msg").val();
+        if (!set_error_msg) {
+            alert("出错显示消息");
+            return false;
+        }
+        var set_share_msg = $("#set_share_msg").val();
+        if (!set_share_msg) {
+            alert("微信分享显示消息");
+            return false;
+        }
+        var set_invite_msg = $("#set_invite_msg").val();
+        if (!set_invite_msg) {
+            alert("邀请好友显示消息");
+            return false;
+        }
+        var set_tixian_nomoney = $("#set_tixian_nomoney").val();
+        if (!set_tixian_nomoney) {
+            alert("未满提现金额时显示消息");
+            return false;
+        }
+        var set_tixian_dateuntil = $("#set_tixian_dateuntil").val();
+        if (!set_tixian_dateuntil) {
+            alert("活动截止显示消息");
             return false;
         }
         $("#addform").submit();
