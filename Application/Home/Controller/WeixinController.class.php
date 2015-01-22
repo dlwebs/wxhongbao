@@ -97,16 +97,37 @@ class WeixinController extends BaseController {
         $fromUserName = (string)$data['FromUserName'];//用户微信token
         $toUserName = $this->_token;//(string)$data[ToUserName]微信公众号
         $eventType = (string)$data['Event'];//subscribe(订阅)、unsubscribe(取消订阅)
-        $userobj = new \Admin\Model\UserModel();
+        $userobj = M('user');
+        
+        $appid = session('app_id');
+        $appsecret = session('app_secret');
+        $access_token = $_SESSION['access_token'];
+        if (!$access_token) {
+            $token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appid.'&secret='.$appsecret;
+            $token_result = json_decode(file_get_contents($token_url), true);
+            $access_token = $token_result['access_token'];
+            $_SESSION['access_token'] = $access_token;
+        }
+        $userinfo_url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$access_token.'&openid='.$fromUserName.'&lang=zh_CN';
+        $json_content = file_get_contents($userinfo_url);
+        $json_obj = json_decode($json_content, true);
+
         $insert['user_id'] = $fromUserName;
-        $insert['user_follow'] = $eventType;
+        if ($eventType == 'subscribe') {
+            $insert['user_status'] = '1';
+        } else {
+            $insert['user_status'] = '0';
+        }
         $userInfo = $userobj->getUserByIdWeixin($insert['user_id'], $toUserName);
         if ($userInfo) {
-            $userobj->where('user_id = "'.$insert['user_id'].'" and user_weixin = "'.$toUserName.'"')->setField('user_follow', $insert['user_follow']);
+            $userobj->where('user_id = "'.$insert['user_id'].'" and user_weixin = "'.$toUserName.'"')->setField('user_status', $insert['user_status']);
         } else {
+            $insert['user_name'] = $json_obj['nickname'];
             $insert['user_regdate'] = date('Y-m-d H:i:s');
             $insert['user_weixin'] = $toUserName;
-            $insert['user_name'] = '普通微信用户';
+            $insert['user_image'] = $json_obj['headimgurl'];
+            $insert['user_money'] = 0;
+            $insert['user_module'] = 'hongbao';
             $userobj->add($insert);
         }
         return '关注成功';
