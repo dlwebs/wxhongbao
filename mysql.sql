@@ -29,6 +29,7 @@ CREATE TABLE `wxmodule_weixin` (
   `weixin_appsecret` varchar(50) NOT NULL COMMENT 'appsecret',
   `weixin_regdate` datetime NOT NULL COMMENT '公众号添加时间',
   `weixin_dispatchurl` varchar(200) NOT NULL COMMENT '第三方转发地址',
+  `weixin_dispatchtoken` varchar(50) NOT NULL COMMENT '第三方token',
   PRIMARY KEY (`weixin_id`),
   UNIQUE KEY weixin_token (weixin_token)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='公众号表';

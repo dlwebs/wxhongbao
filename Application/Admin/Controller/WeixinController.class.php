@@ -94,6 +94,10 @@ class WeixinController extends BaseController {
                 $this->error('请上传公众号二维码');
             }
         }
+        if ($post['weixin_dispatchtoken']) {
+            $post['weixin_callbackurl'] =  'http://'.$_SERVER['SERVER_NAME'].'/index.php/api/'.$post['weixin_dispatchtoken'];
+            $post['weixin_token'] = $post['weixin_dispatchtoken'];
+        }
         if (isset($post['id']) && $post['id']) {
             $wx_id = $post['id'];
             unset($post['id']);
