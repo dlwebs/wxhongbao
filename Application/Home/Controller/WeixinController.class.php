@@ -87,11 +87,13 @@ class WeixinController extends BaseController {
 
     public function receiveText($data){
         $post = array('fromUserName'=>(string)$data['FromUserName'], 'toUserName'=>$this->_token/*(string)$data['ToUserName']*/, 'content'=>(string)$data['Content']);
-        $resource = new \Admin\Model\ResourceModel();
-        $result = $resource->updateResourceCode($post);
-        $this->_wechat->replyNews(
-            array("红包","红包","http://".$_SERVER['SERVER_NAME']."/index.php/index/index?parentid=".$post['fromUserName'], '')
-        );
+        if ($post['content'] == '红包') {
+            $this->_wechat->replyNews(
+                array("红包","红包","http://".$_SERVER['SERVER_NAME']."/index.php/index/index?parentid=".$post['fromUserName'], '')
+            );
+        } else {
+            return '未知指令';
+        }
     }
 
     public function receiveEvent($data) {
