@@ -28,7 +28,7 @@ class WeixinController extends BaseController {
         $RX_EVENT = trim($data['Event']);
 //        if (!in_array($RX_EVENT, $receiveEvent)) {
             $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-            $ch = curl_init($wxinfo['weixin_dispatchurl']);
+            $ch = curl_init('http://inleader.weixinprint.com/weixin?publicUserId=5566');
             curl_setopt($ch, CURLOPT_MUTE, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
