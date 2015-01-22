@@ -10,12 +10,33 @@ CREATE TABLE `wxmodule_user` (
   `user_status` enum('1','0') NOT NULL COMMENT '用户状态，1是启用，0是停用',
   `user_money` float(10,2) NOT NULL COMMENT '用户的金额',
   `user_module` varchar(50) NOT NULL COMMENT '用户模块',
+  `user_weixin` varchar(50) NOT NULL COMMENT '用户所属微信公众号，关联weixin表weixin_token字段',
   PRIMARY KEY (`id`),
   UNIQUE KEY user_module_id (user_id, user_module)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户表';
-INSERT INTO `wxmodule_user` VALUES (1, 'admin', '管理员',  '21232f297a57a5a743894a0e4a801fc3', now(), '', '1', 0, '');
+INSERT INTO `wxmodule_user` VALUES (1, 'admin', '管理员',  '21232f297a57a5a743894a0e4a801fc3', now(), '', '1', 0, '', '');
 
 
+DROP TABLE IF EXISTS `wxmodule_weixin`;
+CREATE TABLE `wxmodule_weixin` (
+  `weixin_id` smallint(6) NOT NULL auto_increment,
+  `weixin_number` varchar(50) NOT NULL COMMENT '公众号原始id',
+  `weixin_name` varchar(50) NOT NULL COMMENT '公众号名称',
+  `weixin_callbackurl` varchar(200) NOT NULL COMMENT 'api调用地址',
+  `weixin_token` varchar(50) NOT NULL COMMENT 'token',
+  `weixin_imgcode` varchar(50) NOT NULL COMMENT '公众号帐号二维码',
+  `weixin_appid` varchar(50) NOT NULL COMMENT 'appid',
+  `weixin_appsecret` varchar(50) NOT NULL COMMENT 'appsecret',
+  `weixin_regdate` datetime NOT NULL COMMENT '公众号添加时间',
+  `weixin_dispatchurl` varchar(200) NOT NULL COMMENT '第三方转发地址',
+  PRIMARY KEY (`weixin_id`),
+  UNIQUE KEY weixin_token (weixin_token)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='公众号表';
+
+
+--
+-- 红包模块数据库表
+--
 DROP TABLE IF EXISTS `wxmodule_hongbao_money`;
 CREATE TABLE `wxmodule_hongbao_money` (
   `money_id` int(11) NOT NULL auto_increment,
@@ -23,6 +44,7 @@ CREATE TABLE `wxmodule_hongbao_money` (
   `money_number` float(8,2) NOT NULL default 0,
   `money_from` varchar(50) NOT NULL COMMENT '原则上关联user表的user_id字段，当是初始资金时保存0',
   `money_time` datetime NOT NULL,
+  `money_weixin` varchar(50) NOT NULL COMMENT '所属微信公众号，关联weixin表weixin_token字段',
   PRIMARY KEY (`money_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='资金表';
 
@@ -40,6 +62,7 @@ CREATE TABLE `wxmodule_hongbao_setting` (
   `set_invite_msg` varchar(255) NOT NULL  COMMENT '邀请好友显示',
   `set_tixian_nomoney` varchar(255) NOT NULL  COMMENT '未满提现金额时点击提取显示',
   `set_tixian_dateuntil` varchar(255) NOT NULL  COMMENT '活动截止点击提取显示',
+  `set_weixin` varchar(50) NOT NULL COMMENT '红包所属微信公众号，关联weixin表weixin_token字段',
   PRIMARY KEY (`set_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='设置表';
 INSERT INTO `wxmodule_hongbao_setting` VALUES (1, 10, 100, 1, now(), '', '', '', '', '', '');
@@ -56,11 +79,14 @@ CREATE TABLE `wxmodule_hongbao_tixian` (
   `tx_number` varchar(50) NOT NULL  COMMENT '提现金额',
   `tx_date` datetime NOT NULL  COMMENT '提现日期',
   `tx_status` enum('0','1') NOT NULL COMMENT '提现状态，1是以发钱，0是未发钱',
+  `tx_weixin` varchar(50) NOT NULL COMMENT '提现所属微信公众号，关联weixin表weixin_token字段',
   PRIMARY KEY (`tx_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='提现表';
 
-=================================================================================================
 
+--
+-- 投票模块数据库表
+--
 DROP TABLE IF EXISTS `wxmodule_vote`;
 CREATE TABLE `wxmodule_vote` (
   `vote_id` int(11) NOT NULL auto_increment,

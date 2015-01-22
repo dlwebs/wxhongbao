@@ -35,12 +35,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+
+            <ul class="nav nav-sidebar">
+             <li <if condition="$current_c eq 'Weixin' and $current_a eq 'list'">class="active"</if>><a href="__MODULE__/Weixin/list">公众号列表</a></li>
+            <li <if condition="$current_c eq 'Weixin' and $current_a eq 'add'">class="active"</if>><a href="__MODULE__/Weixin/add">添加公众号</a></li>
+          </ul>
           
           <ul class="nav nav-sidebar">
              <li <if condition="$current_c eq 'Set' and $current_a eq 'setting'">class="active"</if>><a href="__MODULE__/Set/view">红包设置</a></li>
-          </ul>
-
-          <ul class="nav nav-sidebar">
              <li <if condition="$current_c eq 'Index' and $current_a eq 'txlist'">class="active"</if>><a href="__MODULE__/Index/txlist">提现申请列表</a></li>
           </ul>
 

@@ -11,6 +11,8 @@ $private_config = array(
                         'URL_ROUTE_RULES' => array(
                                                   'viewtx/:id' => 'Index/txdetail',
                                                   'modtx/:id' => 'Index/modtx',
+                                                  'modweixin/:wxid' => 'Weixin/modweixin',
+                                                  'delweixin/:wxid' => 'Weixin/delweixin',
                                                   )
                         );
 
