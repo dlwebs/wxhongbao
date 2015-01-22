@@ -26,20 +26,21 @@ class WeixinController extends BaseController {
 
         $receiveEvent = array('subscribe', 'unsubscribe');
         $RX_EVENT = trim($data['Event']);
-        if (!in_array($RX_EVENT, $receiveEvent)) {
+//        if (!in_array($RX_EVENT, $receiveEvent)) {
+            $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
             $ch = curl_init($wxinfo['weixin_dispatchurl']);
             curl_setopt($ch, CURLOPT_MUTE, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postStr);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             $output = curl_exec($ch);
             curl_close($ch);
             echo $output ;
             exit;
-        }
+//        }
         
         switch($RX_TYPE){
             case Wechat::MSG_TYPE_TEXT:
