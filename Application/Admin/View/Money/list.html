@@ -1,0 +1,30 @@
+<h2 class="sub-header">红包列表</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>所属公众号</th>
+            <th>初始资金</th>
+            <th>提现资金</th>
+            <th>分享得到资金</th>
+            <th>活动截止日</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <foreach name="hblist" item="hb">
+          <tr>
+            <td class="col-sm-2">{$hb.weixin_name}</td>
+            <td class="col-sm-2">{$hb.set_beginmoney}</td>
+            <td class="col-sm-2">{$hb.set_getmoney}</td>
+            <td class="col-sm-2">{$hb.set_sharemoney}</td>
+            <td class="col-sm-2">{$hb.set_untildate}</td>
+            <td class="col-sm-2">
+                <a href="__MODULE__/modhb/{$hb.set_id}">修改</a> 
+            </td>
+          </tr>
+        </foreach>
+        </tbody>
+      </table>
+      {$page}
+    </div>

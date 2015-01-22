@@ -9,10 +9,11 @@ $private_config = array(
                         'URL_ROUTER_ON' => true,
                         'URL_CASE_INSENSITIVE' =>true,
                         'URL_ROUTE_RULES' => array(
-                                                  'viewtx/:id' => 'Index/txdetail',
-                                                  'modtx/:id' => 'Index/modtx',
+                                                  'viewtx/:id' => 'Money/txdetail',
+                                                  'modtx/:id' => 'Money/modtx',
                                                   'modweixin/:wxid' => 'Weixin/modweixin',
                                                   'delweixin/:wxid' => 'Weixin/delweixin',
+                                                  'modhb/:hbid' => 'Money/modhongbao',
                                                   )
                         );
 

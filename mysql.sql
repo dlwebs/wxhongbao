@@ -65,7 +65,6 @@ CREATE TABLE `wxmodule_hongbao_setting` (
   `set_weixin` varchar(50) NOT NULL COMMENT '红包所属微信公众号，关联weixin表weixin_token字段',
   PRIMARY KEY (`set_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='设置表';
-INSERT INTO `wxmodule_hongbao_setting` VALUES (1, 10, 100, 1, now(), '', '', '', '', '', '');
 
 
 DROP TABLE IF EXISTS `wxmodule_hongbao_tixian`;
